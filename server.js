@@ -15,6 +15,13 @@ const origin =
     : process.env.FRONTEND_LOCAL_URL;
 
 // App
+app.use((req, res, next) => {
+    if (req.method === "OPTIONS") {
+      res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+      return res.status(200).json({});
+    }
+    next();
+  });
 app.use(cors({
     origin: origin,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
