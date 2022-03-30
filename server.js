@@ -12,9 +12,7 @@ const PORT = process.env.PORT || 5000
 
 // App
 app.use(cors({
-    origin: ["https://vuemployeemanagement.herokuapp.com", 
-    "https://velvety-rabanadas-dffc6b.netlify.app/"],
-    methods: ["GET", "POST", "DELETE", "PUT"],
+    origin: ["https://velvety-rabanadas-dffc6b.netlify.app"],
     credentials: true
 }))
 app.use(express.json())
