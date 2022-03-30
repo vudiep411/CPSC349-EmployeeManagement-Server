@@ -12,8 +12,8 @@ const PORT = process.env.PORT || 5000
 
 // App
 app.use(cors({
-    origin: "*",
-    methods: ["GET", "POST"],
+    origin: "https://vuemployeemanagement.herokuapp.com",
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
 }))
 app.use(express.json())
