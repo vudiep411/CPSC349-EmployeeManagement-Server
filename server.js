@@ -9,10 +9,16 @@ const dotenv = require('dotenv')
 dotenv.config()
 const PORT = process.env.PORT || 5000
 
+const origin =
+  process.env.NODE_ENV === "production"
+    ? process.env.FRONTEND_PROD_URL
+    : process.env.FRONTEND_LOCAL_URL;
 
 // App
 app.use(cors({
-    origin: "*",
+    origin: origin,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
 }))
 app.use(express.json())
 app.use(cookieParser())
