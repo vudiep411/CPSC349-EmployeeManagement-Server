@@ -12,7 +12,11 @@ const PORT = process.env.PORT || 5000
 
 // App
 
-app.use(cors())
+app.use(cors({
+    origin: ["https://velvety-rabanadas-dffc6b.netlify.app"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+}))
 app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
