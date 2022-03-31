@@ -36,17 +36,17 @@ app.use(session({
 // Handle database disconnect
 function handleDisconnect()
 {
+    db = mysql.createConnection({
+        user: process.env.user,
+        host: process.env.host,
+        password: process.env.password,
+        database: process.env.database
+    })
     db.connect((err) => {
         if(err)
         {
             console.log('Error when connecting to db:', err)
-            setTimeout(2000)
-            db = mysql.createConnection({
-                user: process.env.user,
-                host: process.env.host,
-                password: process.env.password,
-                database: process.env.database
-            })
+            setTimeout(handleDisconnect, 2000)          
         }
     })
     db.on('error', (err) => {
