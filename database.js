@@ -7,7 +7,7 @@ const db = mysql.createConnection({
     database: process.env.database
 })
 
-export function handleDisconnect()
+const handleDisconnect = () =>
 {
     db = mysql.createConnection({
         user: process.env.user,
@@ -34,4 +34,4 @@ export function handleDisconnect()
         }
     })
 }
-module.exports = { db }
+module.exports = { db, handleDisconnect }
