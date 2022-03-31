@@ -8,7 +8,6 @@ const session = require('express-session')
 const dotenv = require('dotenv')
 dotenv.config()
 const PORT = process.env.PORT || 5000
-const mysql = require('mysql')
 var { db } = require('./database')
 
 // App
@@ -36,6 +35,8 @@ app.use(session({
    }
 }))
 
+//db
+db.connect()
 
 // Default Route
 app.use("/", require('./routes/controllers'))

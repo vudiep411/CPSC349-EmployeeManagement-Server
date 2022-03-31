@@ -6,6 +6,6 @@ var db = mysql.createConnection({
     password: process.env.password,
     database: process.env.database
 })
-db.connect()
+
 
 module.exports = { db }
