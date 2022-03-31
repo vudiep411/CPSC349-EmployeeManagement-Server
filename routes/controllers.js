@@ -72,6 +72,9 @@ router.delete("/delete/:id", (req, res) => {
         if(err) {
             console.log(err)
         }
+        else{
+            console.log('success')
+        }
     })
 })
 

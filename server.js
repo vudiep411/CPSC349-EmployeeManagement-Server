@@ -40,7 +40,13 @@ function handleDisconnect()
         if(err)
         {
             console.log('Error when connecting to db:', err)
-            setTimeout(handleDisconnect, 2000)
+            setTimeout(2000)
+            db = mysql.createConnection({
+                user: process.env.user,
+                host: process.env.host,
+                password: process.env.password,
+                database: process.env.database
+            })
         }
     })
     db.on('error', (err) => {
