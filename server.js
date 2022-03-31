@@ -23,17 +23,17 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 // Create session
-app.set('trust proxy', 1);
+// app.set('trust proxy', 1);
 
-app.use(session({
-   key: "userId",
-   secret: process.env.SESSION_SECRET,
-   resave: false,
-   saveUninitialized: false,
-   cookie: {
-       expires: 60 * 60 * 24
-   }
-}))
+// app.use(session({
+//    key: "userId",
+//    secret: process.env.SESSION_SECRET,
+//    resave: false,
+//    saveUninitialized: false,
+//    cookie: {
+//        expires: 60 * 60 * 24
+//    }
+// }))
 
 //db
 db.connect()
