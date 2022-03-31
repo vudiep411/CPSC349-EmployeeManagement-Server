@@ -8,8 +8,8 @@ const session = require('express-session')
 const dotenv = require('dotenv')
 dotenv.config()
 const PORT = process.env.PORT || 5000
-const { db } = require('./database')
 const mysql = require('mysql')
+var { db } = require('./database')
 
 // App
 
