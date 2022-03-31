@@ -8,7 +8,7 @@ const session = require('express-session')
 const dotenv = require('dotenv')
 dotenv.config()
 const PORT = process.env.PORT || 5000
-const {handleDisconnect} = require('./database')
+const { db } = require('./database')
 
 // App
 
@@ -34,9 +34,34 @@ app.use(session({
 }))
 
 // Handle database disconnect
+const handleDisconnect = () =>
+{
+    db = mysql.createConnection({
+        user: process.env.user,
+        host: process.env.host,
+        password: process.env.password,
+        database: process.env.database
+    })
+    db.connect((err) => {
+        if(err)
+        {
+            console.log('Error when connecting to db:', err)
+            setTimeout(handleDisconnect, 2000)          
+        }
+    })
+    db.on('error', (err) => {
+        console.log('db error', err)
+        if(err.code === 'PROTOCOL_CONNECTION_LOST')
+        {
+            handleDisconnect();
+        }
+        else
+        {
+            throw err;
+        }
+    })
+}
 handleDisconnect()
-
-
 // Default Route
 app.use("/", require('./routes/controllers'))
 
