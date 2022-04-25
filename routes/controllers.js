@@ -112,15 +112,26 @@ router.post('/login', (req, res) => {
         })
 })
 
-router.get('/login', (req, res) => {
-    if(req.session.user){
-        res.send({loggedIn: true})
-    }
-    else{
-        res.send({loggedIn: false})
-    }
-})
 // Register
+router.get("/checkRegister/:username", (req, res) => {
+    const username = req.params.username
+    db.query('SELECT * FROM users WHERE username = ?', username, (err, result) => {
+        if(err) {
+            console.log(err)
+        }
+        else
+        {
+            if(result.length > 0)
+            {
+                res.send({message: "User Already Exist"})
+            }
+            else{
+                res.send({valid: true})
+            }
+        }
+    })
+})
+
 router.post("/register", async (req, res) => {
     try {
         const hashPassword = await bcrypt.hash(req.body.password, 10)
@@ -162,5 +173,10 @@ router.get("/isAuth", (req, res) => {
         })
     }
 })
+
+router.get('/logout', (req, res) => {
+    res.end()
+})
+
 
 module.exports = router
